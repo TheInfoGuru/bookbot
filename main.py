@@ -1,10 +1,15 @@
 import re
 
-def create_sorted_sheet(sorted_list: list) -> str:
-    text_block = ""
-    for letter_count in sorted_list:
-        text_block = text_block + f"The character '{letter_count[0]}' was found {letter_count[1]} times.\n"
-    return text_block
+def create_report(path: str, word_count: int, sorted_list: list) -> str:
+    report = ""
+    report = f"*** Beginning of the report for {path} ***\n"
+    report = report + f"{word_count} words found in the document.\n\n"
+
+    for char, count in sorted_list:
+        if not char.isalpha():
+            continue
+        report = report + f"The character '{char}' was found {count} times.\n"
+    return report
 
 def sort_character_counts(character_count: dict) -> list:
     return [ (k, character_count[k]) for k in \
@@ -38,8 +43,8 @@ def main():
     word_count = get_word_count(text=book_contents)
     character_counts = get_character_counts(text=book_contents)
     sorted_character_count = sort_character_counts(character_count=character_counts)
-    text_sheet_p1 = create_sorted_sheet(sorted_character_count)
-    print(text_sheet_p1)
+    report = create_report(path=book_path, word_count=word_count, sorted_list=sorted_character_count)
+    print(report)
     exit(0)
 
 main()
