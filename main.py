@@ -3,12 +3,12 @@ import re
 def create_report(path: str, word_count: int, sorted_list: list) -> str:
     report = ""
     report = f"*** Beginning of the report for {path} ***\n"
-    report = report + f"{word_count} words found in the document.\n\n"
-
+    report = report + f"\n{word_count} words found in the document.\n\n"
     for char, count in sorted_list:
         if not char.isalpha():
             continue
         report = report + f"The character '{char}' was found {count} times.\n"
+    report = report + "\n*** End of the report ***"
     return report
 
 def sort_character_counts(character_count: dict) -> list:
